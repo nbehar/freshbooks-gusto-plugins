@@ -1,0 +1,4 @@
+upstream=6b588c9e8bc0683715c44f9e1a0b166946910cb0
+source=https://github.com/civicteam/bill-mcp-server
+path=ap-ar/
+vendored_date=2026-09-17

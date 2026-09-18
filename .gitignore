@@ -1,0 +1,6 @@
+# Dependencies / build caches (Bill.com server vendors lockfile + dist; install locally)
+**/node_modules/
+**/.env
+**/.DS_Store
+*.log
+coverage/

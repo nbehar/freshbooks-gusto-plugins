@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Bill.com AP/AR">
+  <rect width="128" height="128" rx="24" fill="#0F766E"/>
+  <rect x="28" y="36" width="72" height="56" rx="8" fill="#CCFBF1" opacity="0.95"/>
+  <rect x="40" y="48" width="48" height="6" rx="3" fill="#0F766E"/>
+  <rect x="40" y="62" width="36" height="6" rx="3" fill="#14B8A6"/>
+  <rect x="40" y="76" width="28" height="6" rx="3" fill="#14B8A6"/>
+  <circle cx="92" cy="88" r="14" fill="#F0FDFA"/>
+  <path d="M86 88 L90 92 L98 82" fill="none" stroke="#0F766E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

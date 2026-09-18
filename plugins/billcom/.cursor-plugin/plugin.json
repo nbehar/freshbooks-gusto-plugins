@@ -1,0 +1,43 @@
+{
+  "name": "billcom",
+  "displayName": "Bill.com",
+  "version": "1.0.0",
+  "description": "Accounts payable and receivable via Bill.com AP/AR MCP (vendors, bills, payments, invoices, customers).",
+  "author": {
+    "name": "Nikolas Behar"
+  },
+  "license": "MIT",
+  "keywords": ["bill.com", "billcom", "ap", "ar", "accounting", "invoices", "payments", "mcp"],
+  "logo": "assets/logo.svg",
+  "mcpServers": "./mcp.json",
+  "variables": {
+    "BILL_DEV_KEY": {
+      "description": "Developer Key from Settings → Sync & Integrations → Manage Developer Keys",
+      "required": true,
+      "secret": true
+    },
+    "BILL_USERNAME": {
+      "description": "Sync Token Name (or user email when BILL_AUTH_TYPE=full_access)",
+      "required": true
+    },
+    "BILL_PASSWORD": {
+      "description": "Sync Token Value (or user password when BILL_AUTH_TYPE=full_access)",
+      "required": true,
+      "secret": true
+    },
+    "BILL_ORGANIZATION_ID": {
+      "description": "Organization ID starting with 008 (shown on Sync & Integrations)",
+      "required": true
+    },
+    "BILL_ENVIRONMENT": {
+      "description": "Bill.com API environment: production or sandbox",
+      "required": false,
+      "default": "production"
+    },
+    "BILL_AUTH_TYPE": {
+      "description": "Auth mode: sync_token (default, read/sync), full_access (payments/send), or session_token",
+      "required": false,
+      "default": "sync_token"
+    }
+  }
+}
