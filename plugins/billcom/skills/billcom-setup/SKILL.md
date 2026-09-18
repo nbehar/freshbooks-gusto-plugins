@@ -20,14 +20,16 @@ Optional:
 
 - `BILL_ENVIRONMENT` — default `production`; use `sandbox` for app-sandbox.bill.com testing
 - `BILL_AUTH_TYPE` — default `sync_token`; use `full_access` only when payments / send invoice / charge are required
+- `BILL_SESSION_TOKEN` — required only when `BILL_AUTH_TYPE=session_token`; leave unset for other auth modes
 
 ## Steps
 
 1. Confirm plugin variables are set (no secrets in chat or git).
 2. Prefer **sync_token** for listing vendors, bills, invoices, and reporting.
 3. Use **full_access** only when the user needs pay/void/send/charge (and they accept shorter sessions).
-4. Verify with a read-only tool first (e.g. list vendors or list bills) before any writes.
-5. If auth fails, re-check org id (`008…`), token name vs value swap, and environment (production vs sandbox).
+4. For **session_token**, set `BILL_SESSION_TOKEN`; username, password, and organization ID are not used by the server in this mode.
+5. Verify with a read-only tool first (e.g. list vendors or list bills) before any writes.
+6. If auth fails, re-check org id (`008…`), token name vs value swap, and environment (production vs sandbox).
 
 ## Notes
 

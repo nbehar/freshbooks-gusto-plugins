@@ -1,0 +1,28 @@
+name: Validate plugins
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.19"
+          cache: npm
+          cache-dependency-path: plugins/billcom/server/package-lock.json
+      - name: Validate plugin metadata
+        run: node scripts/validate-plugins.cjs
+      - name: Install Bill.com dependencies
+        working-directory: plugins/billcom/server
+        run: npm ci
+      - name: Test Bill.com server
+        working-directory: plugins/billcom/server
+        run: npm test

@@ -50,9 +50,8 @@ uvx mcp-freshbooks==0.2.0
 
 ## Gusto security notes
 
-- Gusto’s official MCP is remote: `https://mcp.api.gusto.com`.
+- Gusto’s official MCP defaults to `https://mcp.api.gusto.com`; set `GUSTO_MCP_URL=https://mcp.api.gusto-demo.com` for demos.
 - Connect with a **Primary** or **Global** admin account.
-- For demos, Gusto may expose `https://mcp.api.gusto-demo.com`.
 - **Always** require explicit user confirmation before any write (run payroll, onboard, log time, move money).
 - Prefer isolated sessions for payroll work and verify LLM output against the Gusto UI before acting on money or people data.
 - See the **gusto-write-safely** skill for the hard rules.
@@ -71,6 +70,9 @@ Vendored from [civicteam/bill-mcp-server](https://github.com/civicteam/bill-mcp-
 | Auth type (default sync_token) | `BILL_AUTH_TYPE` |
 
 See **plugins/billcom/README.md** and skills **billcom-setup** / **billcom-write-safely**. Prefer `sync_token` for reads; use `full_access` only for pay/send/charge. Never commit secrets.
+
+Write guards in this marketplace are skill-level instructions, not programmatic access
+controls. Use provider permissions and least-privilege credentials as the enforcement layer.
 
 ## Attribution
 

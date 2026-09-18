@@ -1,7 +1,7 @@
 {
   "name": "billcom",
   "displayName": "Bill.com",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Accounts payable and receivable via Bill.com AP/AR MCP (vendors, bills, payments, invoices, customers).",
   "author": {
     "name": "Nikolas Behar"
@@ -38,6 +38,11 @@
       "description": "Auth mode: sync_token (default, read/sync), full_access (payments/send), or session_token",
       "required": false,
       "default": "sync_token"
+    },
+    "BILL_SESSION_TOKEN": {
+      "description": "Pre-authenticated session token; required only when BILL_AUTH_TYPE=session_token",
+      "required": false,
+      "secret": true
     }
   }
 }
