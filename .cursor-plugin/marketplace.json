@@ -2,7 +2,7 @@
   "name": "freshbooks-gusto-plugins",
   "owner": { "name": "Nikolas Behar" },
   "metadata": {
-    "description": "FreshBooks accounting, Gusto payroll, and Bill.com AP/AR MCP plugins for Cursor and Grok Bot",
+    "description": "FreshBooks, Gusto, Bill.com, and Era Context MCP plugins for Cursor and Grok Bot",
     "version": "1.1.0",
     "pluginRoot": "plugins"
   },
@@ -32,6 +32,15 @@
       "version": "1.1.0",
       "category": "Payments",
       "keywords": ["bill.com", "billcom", "ap", "ar", "accounting", "invoices", "payments", "mcp"],
+      "logo": "assets/logo.svg"
+    },
+    {
+      "name": "era",
+      "source": "era",
+      "description": "Financial context, transactions, cash flow, and account insights via Era Context MCP.",
+      "version": "1.1.0",
+      "category": "Payments",
+      "keywords": ["era", "finance", "transactions", "cash-flow", "mcp", "payments"],
       "logo": "assets/logo.svg"
     }
   ]

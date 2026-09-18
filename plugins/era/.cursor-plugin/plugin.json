@@ -1,0 +1,20 @@
+{
+  "name": "era",
+  "displayName": "Era Context",
+  "version": "1.1.0",
+  "description": "Financial context, transactions, cash flow, and account insights via Era Context MCP.",
+  "author": {
+    "name": "Nikolas Behar"
+  },
+  "license": "MIT",
+  "keywords": ["era", "finance", "transactions", "cash-flow", "mcp", "payments"],
+  "logo": "assets/logo.svg",
+  "mcpServers": "./mcp.json",
+  "variables": {
+    "ERA_MCP_URL": {
+      "description": "Era Context MCP endpoint; use /mcp when the client requires an explicit path",
+      "required": false,
+      "default": "https://context.era.app"
+    }
+  }
+}

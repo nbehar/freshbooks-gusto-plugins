@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "era": {
+      "type": "http",
+      "url": "${ERA_MCP_URL}"
+    }
+  }
+}
