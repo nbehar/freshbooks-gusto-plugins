@@ -1,7 +1,7 @@
 {
   "name": "freshbooks",
   "displayName": "FreshBooks",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Invoices, clients, expenses, estimates, time tracking, and reports via FreshBooks.",
   "author": {
     "name": "Nikolas Behar"
@@ -22,7 +22,7 @@
     },
     "FRESHBOOKS_REDIRECT_URI": {
       "description": "OAuth redirect URI registered with your FreshBooks app",
-      "required": true,
+      "required": false,
       "default": "https://localhost:8555/callback"
     }
   }

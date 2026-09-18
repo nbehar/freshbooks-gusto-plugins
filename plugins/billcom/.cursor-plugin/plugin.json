@@ -1,7 +1,7 @@
 {
   "name": "billcom",
   "displayName": "Bill.com",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Accounts payable and receivable via Bill.com AP/AR MCP (vendors, bills, payments, invoices, customers).",
   "author": {
     "name": "Nikolas Behar"
@@ -17,17 +17,17 @@
       "secret": true
     },
     "BILL_USERNAME": {
-      "description": "Sync Token Name (or user email when BILL_AUTH_TYPE=full_access)",
-      "required": true
+      "description": "Sync Token Name (or user email); required unless BILL_AUTH_TYPE=session_token",
+      "required": false
     },
     "BILL_PASSWORD": {
-      "description": "Sync Token Value (or user password when BILL_AUTH_TYPE=full_access)",
-      "required": true,
+      "description": "Sync Token Value (or user password); required unless BILL_AUTH_TYPE=session_token",
+      "required": false,
       "secret": true
     },
     "BILL_ORGANIZATION_ID": {
-      "description": "Organization ID starting with 008 (shown on Sync & Integrations)",
-      "required": true
+      "description": "Organization ID starting with 008; required unless BILL_AUTH_TYPE=session_token",
+      "required": false
     },
     "BILL_ENVIRONMENT": {
       "description": "Bill.com API environment: production or sandbox",
@@ -38,6 +38,11 @@
       "description": "Auth mode: sync_token (default, read/sync), full_access (payments/send), or session_token",
       "required": false,
       "default": "sync_token"
+    },
+    "BILL_SESSION_TOKEN": {
+      "description": "Pre-authenticated session token; required only when BILL_AUTH_TYPE=session_token",
+      "required": false,
+      "secret": true
     }
   }
 }

@@ -1,15 +1,16 @@
 {
   "mcpServers": {
     "billcom": {
-      "command": "bash",
-      "args": ["${CURSOR_PLUGIN_ROOT}/scripts/run-mcp.sh"],
+      "command": "node",
+      "args": ["${CURSOR_PLUGIN_ROOT}/scripts/run-mcp.cjs"],
       "env": {
         "BILL_DEV_KEY": "${BILL_DEV_KEY}",
         "BILL_USERNAME": "${BILL_USERNAME}",
         "BILL_PASSWORD": "${BILL_PASSWORD}",
         "BILL_ORGANIZATION_ID": "${BILL_ORGANIZATION_ID}",
         "BILL_ENVIRONMENT": "${BILL_ENVIRONMENT}",
-        "BILL_AUTH_TYPE": "${BILL_AUTH_TYPE}"
+        "BILL_AUTH_TYPE": "${BILL_AUTH_TYPE}",
+        "BILL_SESSION_TOKEN": "${BILL_SESSION_TOKEN}"
       }
     }
   }

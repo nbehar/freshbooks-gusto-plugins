@@ -132,8 +132,6 @@ export class BillClient {
         devKey: this.devKey,
       });
 
-      console.error("[Bill.com API] Login response:", JSON.stringify(response.data, null, 2));
-
       this.sessionId = response.data.sessionId;
       if (!this.sessionId) {
         throw new Error("No sessionId in login response");
@@ -154,7 +152,7 @@ export class BillClient {
         }`
       );
     } catch (error) {
-      console.error("[Bill.com API] Login failed:", error);
+      console.error("[Bill.com API] Login failed");
       const detail = error instanceof Error ? error.message : String(error);
       throw new Error(`Failed to login to Bill.com API: ${detail}`);
     }
@@ -191,7 +189,6 @@ export class BillClient {
   private handleError(error: AxiosError): BillApiError {
     console.error("[Bill.com API] Error details:", {
       status: error.response?.status,
-      data: error.response?.data,
       message: error.message,
     });
 
@@ -228,7 +225,7 @@ export class BillClient {
    */
   async get<T = any>(endpoint: string, params?: Record<string, any>): Promise<T> {
     const headers = await this.getHeaders();
-    console.error(`[Bill.com API] GET ${endpoint}`, { headers, params });
+    console.error(`[Bill.com API] GET ${endpoint}`);
     const response = await this.client.get<T>(endpoint, { params, headers });
     return response.data;
   }

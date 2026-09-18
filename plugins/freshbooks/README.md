@@ -15,7 +15,7 @@ Set these plugin variables:
 |----------|----------|---------|
 | `FRESHBOOKS_CLIENT_ID` | yes | — |
 | `FRESHBOOKS_CLIENT_SECRET` | yes | — |
-| `FRESHBOOKS_REDIRECT_URI` | yes | `https://localhost:8555/callback` |
+| `FRESHBOOKS_REDIRECT_URI` | no | `https://localhost:8555/callback` |
 
 Create an app at [freshbooks.com/pages/developer-signup](https://www.freshbooks.com/pages/developer-signup), register the redirect URI, then authenticate with `freshbooks_authenticate`.
 

@@ -1,7 +1,7 @@
 {
   "name": "gusto",
   "displayName": "Gusto",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Payroll, employees, contractors, and time data via Gusto’s official MCP.",
   "author": {
     "name": "Nikolas Behar"
@@ -9,5 +9,12 @@
   "license": "MIT",
   "keywords": ["gusto", "payroll", "hr", "mcp", "employees"],
   "logo": "assets/logo.svg",
-  "mcpServers": "./mcp.json"
+  "mcpServers": "./mcp.json",
+  "variables": {
+    "GUSTO_MCP_URL": {
+      "description": "Gusto MCP endpoint; use the demo endpoint for sandbox data",
+      "required": false,
+      "default": "https://mcp.api.gusto.com"
+    }
+  }
 }

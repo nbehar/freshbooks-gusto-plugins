@@ -87,7 +87,6 @@ export class BillClient {
                 organizationId: this.organizationId,
                 devKey: this.devKey,
             });
-            console.error("[Bill.com API] Login response:", JSON.stringify(response.data, null, 2));
             this.sessionId = response.data.sessionId;
             if (!this.sessionId) {
                 throw new Error("No sessionId in login response");
@@ -102,7 +101,7 @@ export class BillClient {
             console.error(`[Bill.com API] Login successful (${this.authType}), session expires in ${this.authType === "sync_token" ? "48 hours" : "35 minutes"}`);
         }
         catch (error) {
-            console.error("[Bill.com API] Login failed:", error);
+            console.error("[Bill.com API] Login failed");
             const detail = error instanceof Error ? error.message : String(error);
             throw new Error(`Failed to login to Bill.com API: ${detail}`);
         }
@@ -135,7 +134,6 @@ export class BillClient {
     handleError(error) {
         console.error("[Bill.com API] Error details:", {
             status: error.response?.status,
-            data: error.response?.data,
             message: error.message,
         });
         if (error.response) {
@@ -159,7 +157,7 @@ export class BillClient {
      */
     async get(endpoint, params) {
         const headers = await this.getHeaders();
-        console.error(`[Bill.com API] GET ${endpoint}`, { headers, params });
+        console.error(`[Bill.com API] GET ${endpoint}`);
         const response = await this.client.get(endpoint, { params, headers });
         return response.data;
     }

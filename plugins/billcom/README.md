@@ -19,6 +19,7 @@ Set plugin variables (Plugins → Configure). Mapping from the Bill.com portal (
 | Organization ID | `BILL_ORGANIZATION_ID` | Starts with `008` |
 | — | `BILL_ENVIRONMENT` | `production` (default) or `sandbox` |
 | — | `BILL_AUTH_TYPE` | `sync_token` (default), `full_access`, or `session_token` |
+| — | `BILL_SESSION_TOKEN` | Required only when `BILL_AUTH_TYPE=session_token`; stored as a secret |
 
 ### Auth types (summary)
 
@@ -28,17 +29,19 @@ Set plugin variables (Plugins → Configure). Mapping from the Bill.com portal (
 | Pay bills, void payments, send invoices, charge customers | No | Yes |
 | Session duration | ~48 hours | ~35 minutes |
 
-For `full_access`, `BILL_USERNAME` / `BILL_PASSWORD` are the Bill.com user email and password. Prefer sync tokens for read/sync workflows.
+For `full_access`, `BILL_USERNAME` / `BILL_PASSWORD` are the Bill.com user email and password. For `session_token`, set `BILL_SESSION_TOKEN`; the server does not use username, password, or organization ID. Prefer sync tokens for read/sync workflows.
 
 ## How the MCP server launches
 
-`mcp.json` runs:
+`mcp.json` uses the cross-platform Node launcher:
 
 ```text
-bash ${CURSOR_PLUGIN_ROOT}/scripts/run-mcp.sh
+node ${CURSOR_PLUGIN_ROOT}/scripts/run-mcp.cjs
 ```
 
-The script resolves its directory, ensures `server/node_modules` and `server/dist/index.js` exist (`npm ci && npm run build` if needed), then `exec node dist/index.js`. Credentials are passed via env placeholders from plugin variables.
+The launcher installs dependencies when `server/node_modules` is absent and rebuilds when
+`server/dist/index.js` is absent or older than `server/src/`. The shell launcher remains
+available as a POSIX fallback. Credentials are passed via env placeholders from plugin variables.
 
 ### Rebuild locally
 
