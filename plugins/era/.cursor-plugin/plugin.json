@@ -9,5 +9,12 @@
   "license": "MIT",
   "keywords": ["era", "finance", "transactions", "cash-flow", "mcp", "payments"],
   "logo": "assets/logo.svg",
-  "mcpServers": "./mcp.json"
+  "mcpServers": "./mcp.json",
+  "variables": {
+    "ERA_MCP_URL": {
+      "description": "Era Context MCP endpoint; use /mcp when the client requires an explicit path",
+      "required": false,
+      "default": "https://context.era.app"
+    }
+  }
 }

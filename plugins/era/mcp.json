@@ -2,7 +2,7 @@
   "mcpServers": {
     "era": {
       "type": "http",
-      "url": "https://context.era.app"
+      "url": "${ERA_MCP_URL}"
     }
   }
 }

@@ -1,34 +1,26 @@
 ---
 name: era-cash-flow
-description: Use this when the user wants Era cash-flow analysis or a spending forecast, especially when transfers may distort results.
+description: Use this when the user asks about Era cash flow, spending analysis, forecasts, period comparisons, daily summaries, or “can I afford X?”
 ---
 
-# Cash flow and forecasts
+# Cash flow and insights
 
-Produce a read-only cash-flow view from current, correctly classified data.
+Answer spending questions from Era’s insight tools; keep transfers honest first.
 
 ## Workflow
 
-1. Clarify the accounts, reporting period, forecast horizon, and whether the
-   user wants actual cash flow, projected spending, or both.
-2. Review relevant accounts, recurring charges, and transactions.
-3. Identify money moving between the user's own accounts. Check existing
-   transfer links before calculating cash flow so both sides are not counted as
-   income and spending.
-4. Present uncertain transfer candidates for review. Creating or changing a
-   transfer link is a write and requires an exact preview and explicit
-   confirmation under **era-write-safely**.
-5. Only after transfer treatment is settled, fetch cash flow and forecasts.
-6. Report the date range, included accounts, assumptions, recurring items,
-   excluded or stale data, and uncertainty alongside the result.
+1. If internal transfers may duplicate cash flow, check/link with `transactions__manage_transfer_links` (confirm before write) or note the risk.
+2. Pull the right read tools:
+   - `insights__get_cash_flow`
+   - `insights__analyze_spending`
+   - `insights__compare_spending_periods`
+   - `insights__forecast_spending`
+   - `insights__get_daily_financial_summary` / `insights__get_daily_category_spending`
+3. Tie answers to concrete numbers from tool payloads (dates, categories, totals). Flag uncertainty.
+4. For “can I afford X?” combine balances (`accounts__*`) with forecast/recurring charges — do not invent buffers.
+5. Offer optional memory (`knowledge__remember`) only for facts the user explicitly wants saved.
 
 ## Rules
 
-- Do not create transfer links merely to complete a forecast.
-- Never execute a transfer of funds from this analysis. Every transfer between
-  the user's own accounts requires separate, explicit confirmation immediately
-  before execution.
-- Label forecasts as estimates, not guaranteed balances or personalized
-  financial advice.
-- If transaction cleanup would materially alter the result, explain that and
-  obtain confirmation for those writes before rerunning the forecast.
+- Default read-only. Writes (rules, tags, visibility, transfers) require **era-write-safely**.
+- Billing or plan changes are a different job and need `mcp:billing-write` plus extra consent — do not sneak them into a cash-flow ask.

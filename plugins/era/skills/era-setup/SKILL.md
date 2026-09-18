@@ -1,37 +1,32 @@
 ---
 name: era-setup
-description: Use this when the user needs to connect Era Context MCP, authorize OAuth scopes, or verify the connection.
+description: Use this when the user needs to connect Era Context MCP, choose production vs alternate URL, complete OAuth, or verify read access before money or write tools.
 ---
 
 # Era Context setup
 
-Connect Era Context as an OAuth 2.1-protected remote MCP server.
+Connect Era’s remote Streamable HTTP MCP (OAuth 2.1).
+
+## Endpoint
+
+- Default: `https://context.era.app` (explicit path `https://context.era.app/mcp` is equivalent)
+- Optional plugin variable `ERA_MCP_URL` only if pointing at a non-default host; leave unset for production
+- Server card: `https://era.app/.well-known/mcp/server-card.json`
+- Docs: `https://era.app/help/mcp-server-era-context/`
 
 ## Steps
 
-1. Add `https://context.era.app` as a **Streamable HTTP** MCP server. If the
-   client requires an explicit endpoint path, use `https://context.era.app/mcp`;
-   both addresses reach the same server.
-2. Start the connect flow and sign in to the Era account whose accounts,
-   memory, and rules the user intends to expose.
-3. Review the requested OAuth scopes before approval:
-   - `mcp:discovery` for server and tool discovery
-   - `mcp:tools-basic` for read-oriented tools
-   - `mcp:tools-write` only when writes are needed
-   - `mcp:resources-read` when MCP resources are needed
-   - `offline_access` only when continued access is intended
-   - `mcp:billing-write` separately, only for requested billing changes
-4. Begin with the least privilege needed. Do not request write or billing
-   access merely to test the connection.
-5. Verify the connection with a read-only question, such as an account list,
-   financial overview, or weekly summary. Do not test with a write.
+1. Confirm the plugin is enabled and `ERA_MCP_URL` is the intended endpoint (default production).
+2. Start the in-product OAuth / connect flow. Sign in with the Era account that owns the bank connections, memory, and rules the user wants the assistant to use.
+3. Review scopes. Typical set includes `mcp:discovery`, `mcp:tools-basic`, `mcp:tools-write`, `mcp:resources-read`, `offline_access`. **Do not** request `mcp:billing-write` unless the user explicitly wants billing changes.
+4. After OAuth returns, run a **read-only** smoke check first, for example:
+   - `knowledge__get_financial_context_and_overview`
+   - `accounts__list_financial_accounts`
+   - `billing__get_current_plan` (read only; no billing-write scope needed)
+5. Only then offer write or transfer work. Point the user at **era-write-safely** for any write, destructive, transfer, or billing action.
 
-## Verification and troubleshooting
+## Notes
 
-- Server card: `https://era.app/.well-known/mcp/server-card.json`
-- Documentation: `https://era.app/help/mcp-server-era-context/`
-- If tools are missing, check the approved scopes, Era plan, connected
-  accounts, and client support before reconnecting.
-- Revoke access by disconnecting the MCP client. Disconnect an underlying bank
-  institution only when the user explicitly asks and confirms that destructive
-  action.
+- No local secrets or env vars for the normal OAuth path.
+- Tool visibility depends on plan, approved scopes, connected accounts, and client. Missing tools usually mean missing scope or plan — do not invent workarounds.
+- Agents never receive bank login credentials; bank connect flows stay in Era’s UI.

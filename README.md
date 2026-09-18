@@ -80,8 +80,8 @@ See **plugins/billcom/README.md** and skills **billcom-setup** / **billcom-write
 
 - Era Context is a remote Streamable HTTP MCP at `https://context.era.app`
   (`https://context.era.app/mcp` is the explicit-path equivalent).
-- No plugin secrets or variables are required; connect with OAuth 2.1 and begin
-  with a read-only overview.
+- No plugin secrets are required. The optional `ERA_MCP_URL` variable defaults
+  to the production endpoint; connect with OAuth 2.1 and begin read-only.
 - Review least-privilege scopes. Billing writes require the separate
   `mcp:billing-write` scope and extra consent.
 - Every transfer between the user's own accounts requires explicit
