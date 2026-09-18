@@ -134,22 +134,16 @@ export class BillClient {
     handleError(error) {
         console.error("[Bill.com API] Error details:", {
             status: error.response?.status,
-            message: error.message,
+            code: error.code,
         });
         if (error.response) {
-            const errorData = error.response.data;
-            const detail = errorData?.message ||
-                errorData?.error ||
-                JSON.stringify(errorData) ||
-                error.message ||
-                "Unknown API error";
-            return new BillApiError(`Bill.com API error (${error.response.status}): ${detail}`, error.response.status, "api_error");
+            return new BillApiError(`Bill.com API error (${error.response.status})`, error.response.status, "api_error");
         }
         else if (error.request) {
             return new BillApiError("No response received from Bill.com API", 0, "network_error");
         }
         else {
-            return new BillApiError(error.message || "Unknown client error", 0, "client_error");
+            return new BillApiError("Bill.com API client error", 0, "client_error");
         }
     }
     /**
