@@ -31,6 +31,8 @@ Set plugin variables (Plugins → Configure). Mapping from the Bill.com portal (
 
 For `full_access`, `BILL_USERNAME` / `BILL_PASSWORD` are the Bill.com user email and password. For `session_token`, set `BILL_SESSION_TOKEN`; the server does not use username, password, or organization ID. Prefer sync tokens for read/sync workflows.
 
+The plugin schema requires the default `sync_token` credentials so incomplete installs fail early; `BILL_SESSION_TOKEN` stays optional in the schema and the launcher requires it when `BILL_AUTH_TYPE=session_token`.
+
 ## How the MCP server launches
 
 `mcp.json` uses the cross-platform Node launcher:

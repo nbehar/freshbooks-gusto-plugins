@@ -9,6 +9,26 @@ const sourceDir = join(serverDir, "src");
 const distEntry = join(serverDir, "dist", "index.js");
 const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
 
+function isConfigured(name) {
+  const value = process.env[name]?.trim();
+  return Boolean(value && value !== `\${${name}}`);
+}
+
+function validateCredentials() {
+  const authType = process.env.BILL_AUTH_TYPE?.trim() || "sync_token";
+  const required =
+    authType === "session_token"
+      ? ["BILL_DEV_KEY", "BILL_SESSION_TOKEN"]
+      : ["BILL_DEV_KEY", "BILL_USERNAME", "BILL_PASSWORD", "BILL_ORGANIZATION_ID"];
+  const missing = required.filter((name) => !isConfigured(name));
+
+  if (missing.length > 0) {
+    throw new Error(
+      `Missing required Bill.com configuration for ${authType} auth: ${missing.join(", ")}`
+    );
+  }
+}
+
 function newestMtime(path) {
   const stat = statSync(path);
   if (!stat.isDirectory()) {
@@ -37,6 +57,8 @@ function runNpm(args) {
 }
 
 try {
+  validateCredentials();
+
   let dependenciesInstalled = true;
   try {
     statSync(join(serverDir, "node_modules"));

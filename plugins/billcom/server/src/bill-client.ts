@@ -189,19 +189,12 @@ export class BillClient {
   private handleError(error: AxiosError): BillApiError {
     console.error("[Bill.com API] Error details:", {
       status: error.response?.status,
-      message: error.message,
+      code: error.code,
     });
 
     if (error.response) {
-      const errorData = error.response.data as any;
-      const detail =
-        errorData?.message ||
-        errorData?.error ||
-        JSON.stringify(errorData) ||
-        error.message ||
-        "Unknown API error";
       return new BillApiError(
-        `Bill.com API error (${error.response.status}): ${detail}`,
+        `Bill.com API error (${error.response.status})`,
         error.response.status,
         "api_error"
       );
@@ -213,7 +206,7 @@ export class BillClient {
       );
     } else {
       return new BillApiError(
-        error.message || "Unknown client error",
+        "Bill.com API client error",
         0,
         "client_error"
       );

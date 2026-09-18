@@ -353,22 +353,34 @@ describe("BillClient", () => {
   });
 
   describe("error handling", () => {
-    it("should handle API errors with status code", async () => {
-      const mockLoginResponse = { data: { sessionId: "test-session", organizationId: "008xxx", userId: "user123", trusted: false } };
+    it("should omit API response bodies and session tokens from errors", () => {
       const mockError = {
         response: {
-          status: 404,
-          data: { message: "Not found" },
+          status: 401,
+          data: {
+            message: "Invalid session secret-session-token",
+            sessionId: "secret-session-token",
+          },
         },
-        message: "Request failed",
+        message: "Request failed with secret-session-token",
       };
 
-      mockAxiosInstance.post.mockResolvedValueOnce(mockLoginResponse);
-      mockAxiosInstance.get.mockRejectedValue(mockError);
-
       const testClient = new BillClient(mockConfig);
+      const result = (testClient as any).handleError(mockError);
 
-      await expect(testClient.get("/invalid")).rejects.toBeDefined();
+      expect(result.message).toBe("Bill.com API error (401)");
+      expect(result.message).not.toContain("Invalid session");
+      expect(result.message).not.toContain("secret-session-token");
+    });
+
+    it("should not copy client error messages into thrown errors", () => {
+      const testClient = new BillClient(mockConfig);
+      const result = (testClient as any).handleError({
+        message: "Malformed request containing secret-session-token",
+      });
+
+      expect(result.message).toBe("Bill.com API client error");
+      expect(result.message).not.toContain("secret-session-token");
     });
 
     it("should handle network errors", async () => {

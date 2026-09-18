@@ -13,6 +13,8 @@ Cursor / Grok Bot plugin for Gusto payroll via Gusto’s official remote MCP.
 }
 ```
 
+Cursor substitutes `${GUSTO_MCP_URL}` in the HTTP `url` from the configured plugin variable (or its default).
+
 Connect OAuth in-product. Use a Primary or Global admin. For demos, set
 `GUSTO_MCP_URL=https://mcp.api.gusto-demo.com`.
 
