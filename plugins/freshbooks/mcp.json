@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "freshbooks": {
+      "command": "uvx",
+      "args": ["mcp-freshbooks==0.2.0"],
+      "env": {
+        "FRESHBOOKS_CLIENT_ID": "${FRESHBOOKS_CLIENT_ID}",
+        "FRESHBOOKS_CLIENT_SECRET": "${FRESHBOOKS_CLIENT_SECRET}",
+        "FRESHBOOKS_REDIRECT_URI": "${FRESHBOOKS_REDIRECT_URI}"
+      }
+    }
+  }
+}

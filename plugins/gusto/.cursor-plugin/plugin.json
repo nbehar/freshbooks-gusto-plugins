@@ -1,0 +1,13 @@
+{
+  "name": "gusto",
+  "displayName": "Gusto",
+  "version": "1.0.0",
+  "description": "Payroll, employees, contractors, and time data via Gusto’s official MCP.",
+  "author": {
+    "name": "Nikolas Behar"
+  },
+  "license": "MIT",
+  "keywords": ["gusto", "payroll", "hr", "mcp", "employees"],
+  "logo": "assets/logo.svg",
+  "mcpServers": "./mcp.json"
+}

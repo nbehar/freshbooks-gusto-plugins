@@ -1,0 +1,29 @@
+{
+  "name": "freshbooks",
+  "displayName": "FreshBooks",
+  "version": "1.0.0",
+  "description": "Invoices, clients, expenses, estimates, time tracking, and reports via FreshBooks.",
+  "author": {
+    "name": "Nikolas Behar"
+  },
+  "license": "MIT",
+  "keywords": ["freshbooks", "accounting", "invoices", "mcp", "payments"],
+  "logo": "assets/logo.svg",
+  "mcpServers": "./mcp.json",
+  "variables": {
+    "FRESHBOOKS_CLIENT_ID": {
+      "description": "OAuth client ID from your FreshBooks developer application",
+      "required": true
+    },
+    "FRESHBOOKS_CLIENT_SECRET": {
+      "description": "OAuth client secret from your FreshBooks developer application",
+      "required": true,
+      "secret": true
+    },
+    "FRESHBOOKS_REDIRECT_URI": {
+      "description": "OAuth redirect URI registered with your FreshBooks app",
+      "required": true,
+      "default": "https://localhost:8555/callback"
+    }
+  }
+}

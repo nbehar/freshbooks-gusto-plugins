@@ -1,0 +1,29 @@
+{
+  "name": "freshbooks-gusto-plugins",
+  "owner": { "name": "Nikolas Behar" },
+  "metadata": {
+    "description": "FreshBooks accounting and Gusto payroll MCP plugins for Cursor and Grok Bot",
+    "version": "1.0.0",
+    "pluginRoot": "plugins"
+  },
+  "plugins": [
+    {
+      "name": "freshbooks",
+      "source": "freshbooks",
+      "description": "Invoices, clients, expenses, estimates, time tracking, and reports via FreshBooks.",
+      "version": "1.0.0",
+      "category": "Payments",
+      "keywords": ["freshbooks", "accounting", "invoices", "mcp", "payments"],
+      "logo": "assets/logo.svg"
+    },
+    {
+      "name": "gusto",
+      "source": "gusto",
+      "description": "Payroll, employees, contractors, and time data via Gusto’s official MCP.",
+      "version": "1.0.0",
+      "category": "Payments",
+      "keywords": ["gusto", "payroll", "hr", "mcp", "employees"],
+      "logo": "assets/logo.svg"
+    }
+  ]
+}
