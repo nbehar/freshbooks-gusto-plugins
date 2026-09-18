@@ -24,6 +24,7 @@ describe("BillClient", () => {
   });
 
   afterEach(() => {
+    vi.restoreAllMocks();
     vi.useRealTimers();
   });
 
@@ -83,6 +84,24 @@ describe("BillClient", () => {
           organizationId: "008xxxxx",
           devKey: "test-dev-key",
         });
+      });
+
+      it("should not log credentials, session IDs, or authenticated headers", async () => {
+        const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+        mockAxiosInstance.post.mockResolvedValueOnce({
+          data: { sessionId: "secret-session", organizationId: "008xxx" },
+        });
+        mockAxiosInstance.get.mockResolvedValue({ data: { vendors: [] } });
+
+        const client = new BillClient(syncTokenConfig);
+        await client.get("/vendors", { page: 1 });
+
+        const output = JSON.stringify(errorSpy.mock.calls);
+        expect(output).not.toContain("sync-token-name");
+        expect(output).not.toContain("sync-token-value");
+        expect(output).not.toContain("test-dev-key");
+        expect(output).not.toContain("secret-session");
+        expect(output).not.toContain("headers");
       });
 
       it("should reuse session within 48 hours", async () => {

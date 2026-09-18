@@ -17,17 +17,17 @@
       "secret": true
     },
     "BILL_USERNAME": {
-      "description": "Sync Token Name (or user email when BILL_AUTH_TYPE=full_access)",
-      "required": true
+      "description": "Sync Token Name (or user email); required unless BILL_AUTH_TYPE=session_token",
+      "required": false
     },
     "BILL_PASSWORD": {
-      "description": "Sync Token Value (or user password when BILL_AUTH_TYPE=full_access)",
-      "required": true,
+      "description": "Sync Token Value (or user password); required unless BILL_AUTH_TYPE=session_token",
+      "required": false,
       "secret": true
     },
     "BILL_ORGANIZATION_ID": {
-      "description": "Organization ID starting with 008 (shown on Sync & Integrations)",
-      "required": true
+      "description": "Organization ID starting with 008; required unless BILL_AUTH_TYPE=session_token",
+      "required": false
     },
     "BILL_ENVIRONMENT": {
       "description": "Bill.com API environment: production or sandbox",
