@@ -27,4 +27,29 @@ for (const entry of marketplace.plugins) {
   }
 }
 
+const billcom = readJson("plugins/billcom/.cursor-plugin/plugin.json");
+for (const name of [
+  "BILL_DEV_KEY",
+  "BILL_USERNAME",
+  "BILL_PASSWORD",
+  "BILL_ORGANIZATION_ID",
+]) {
+  if (billcom.variables[name]?.required !== true) {
+    throw new Error(`billcom: ${name} must be required for default sync_token auth`);
+  }
+}
+if (billcom.variables.BILL_SESSION_TOKEN?.required !== false) {
+  throw new Error("billcom: BILL_SESSION_TOKEN must remain optional for conditional auth");
+}
+
+const gusto = readJson("plugins/gusto/.cursor-plugin/plugin.json");
+const gustoMcp = readJson("plugins/gusto/mcp.json");
+const gustoUrl = gustoMcp.mcpServers.gusto.url.replace(
+  /\$\{([^}]+)\}/g,
+  (_, name) => gusto.variables[name]?.default ?? ""
+);
+if (gustoUrl !== "https://mcp.api.gusto.com") {
+  throw new Error("gusto: GUSTO_MCP_URL does not substitute to the production default");
+}
+
 console.log(`Validated marketplace and ${marketplace.plugins.length} plugins.`);

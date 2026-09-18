@@ -23,6 +23,12 @@ jobs:
       - name: Install Bill.com dependencies
         working-directory: plugins/billcom/server
         run: npm ci
+      - name: Build Bill.com server
+        working-directory: plugins/billcom/server
+        run: npm run build
+      - name: Typecheck Bill.com server
+        working-directory: plugins/billcom/server
+        run: npm run typecheck
       - name: Test Bill.com server
         working-directory: plugins/billcom/server
         run: npm test

@@ -17,17 +17,17 @@
       "secret": true
     },
     "BILL_USERNAME": {
-      "description": "Sync Token Name (or user email); required unless BILL_AUTH_TYPE=session_token",
-      "required": false
+      "description": "Sync Token Name (or user email); required for the default sync_token auth path",
+      "required": true
     },
     "BILL_PASSWORD": {
-      "description": "Sync Token Value (or user password); required unless BILL_AUTH_TYPE=session_token",
-      "required": false,
+      "description": "Sync Token Value (or user password); required for the default sync_token auth path",
+      "required": true,
       "secret": true
     },
     "BILL_ORGANIZATION_ID": {
-      "description": "Organization ID starting with 008; required unless BILL_AUTH_TYPE=session_token",
-      "required": false
+      "description": "Organization ID starting with 008; required for the default sync_token auth path",
+      "required": true
     },
     "BILL_ENVIRONMENT": {
       "description": "Bill.com API environment: production or sandbox",
@@ -40,7 +40,7 @@
       "default": "sync_token"
     },
     "BILL_SESSION_TOKEN": {
-      "description": "Pre-authenticated session token; required only when BILL_AUTH_TYPE=session_token",
+      "description": "Optional unless BILL_AUTH_TYPE=session_token; the launcher then requires it",
       "required": false,
       "secret": true
     }
