@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Era Context">
+  <rect width="128" height="128" rx="24" fill="#172554"/>
+  <circle cx="64" cy="64" r="38" fill="#DBEAFE"/>
+  <path d="M43 42h46v11H56v8h29v10H56v8h33v11H43z" fill="#1D4ED8"/>
+</svg>

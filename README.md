@@ -1,6 +1,7 @@
-# FreshBooks, Gusto & Bill.com Plugins
+# FreshBooks, Gusto, Bill.com & Era Context Plugins
 
-Multi-plugin marketplace for **Cursor** and **Grok Bot**: FreshBooks accounting, Gusto payroll, and Bill.com AP/AR via MCP.
+Multi-plugin marketplace for **Cursor** and **Grok Bot**: FreshBooks accounting,
+Gusto payroll, Bill.com AP/AR, and Era financial context via MCP.
 
 ## Layout
 
@@ -10,7 +11,8 @@ freshbooks-gusto-plugins/
 ├── plugins/
 │   ├── freshbooks/
 │   ├── gusto/
-│   └── billcom/
+│   ├── billcom/
+│   └── era/
 ├── README.md
 └── LICENSE
 ```
@@ -18,11 +20,14 @@ freshbooks-gusto-plugins/
 ## Local install / use
 
 1. Open Cursor (or Grok Bot) and add this folder as a local plugin marketplace, or point the plugin root at `plugins/`.
-2. Enable the **freshbooks**, **gusto**, and/or **billcom** plugins from the marketplace.
+2. Enable the **freshbooks**, **gusto**, **billcom**, and/or **era** plugins from the marketplace.
 3. Configure credentials as described below (and in each plugin README).
 4. Restart MCP / reload the window if tools do not appear.
 
-Requires [uv](https://docs.astral.sh/uv/) (`uvx`) for the FreshBooks server. Gusto uses a remote HTTP MCP and needs no local package. Bill.com uses a **vendored** Node MCP server (Node.js ≥ 20.19); first launch may run `npm ci` if `node_modules` is missing.
+Requires [uv](https://docs.astral.sh/uv/) (`uvx`) for the FreshBooks server.
+Gusto and Era use remote HTTP MCP servers and need no local package. Bill.com
+uses a **vendored** Node MCP server (Node.js ≥ 20.19); first launch may run
+`npm ci` if `node_modules` is missing.
 
 ## Submit to Cursor Marketplace
 
@@ -71,6 +76,22 @@ Vendored from [civicteam/bill-mcp-server](https://github.com/civicteam/bill-mcp-
 
 See **plugins/billcom/README.md** and skills **billcom-setup** / **billcom-write-safely**. Prefer `sync_token` for reads; use `full_access` only for pay/send/charge. Never commit secrets.
 
+## Era Context setup and safety
+
+- Era Context is a remote Streamable HTTP MCP at `https://context.era.app`
+  (`https://context.era.app/mcp` is the explicit-path equivalent).
+- No plugin secrets or variables are required; connect with OAuth 2.1 and begin
+  with a read-only overview.
+- Review least-privilege scopes. Billing writes require the separate
+  `mcp:billing-write` scope and extra consent.
+- Every transfer between the user's own accounts requires explicit
+  confirmation. Forget, disconnect, destructive, and other write tools also
+  require a preview and confirmation.
+- Never pass bank credentials to the assistant. Use Era's hosted bank
+  connection flow.
+- See **plugins/era/README.md** and skills **era-setup** /
+  **era-write-safely** for details.
+
 Write guards in this marketplace are skill-level instructions, not programmatic access
 controls. Use provider permissions and least-privilege credentials as the enforcement layer.
 
@@ -79,6 +100,7 @@ controls. Use provider permissions and least-privilege credentials as the enforc
 - FreshBooks MCP: [mcp-freshbooks](https://github.com/AlexlaGuardia/mcp-freshbooks) by Alex LaGuardia (MIT).
 - Gusto MCP: official remote endpoint at `https://mcp.api.gusto.com`.
 - Bill.com AP/AR MCP: [civicteam/bill-mcp-server](https://github.com/civicteam/bill-mcp-server) `ap-ar/` (MIT, Civic).
+- Era Context MCP: official remote endpoint at `https://context.era.app`.
 - Plugin packaging and skills: Nikolas Behar (MIT, 2026).
 
 ## License
